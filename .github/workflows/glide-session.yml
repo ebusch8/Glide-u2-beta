@@ -620,6 +620,18 @@ jobs:
       - name: Launch Minecraft client
         shell: bash
         run: |
+          echo "===== OPENGL ====="
+glxinfo -B
+
+echo "===== VULKAN ====="
+vulkaninfo --summary | head -100
+
+echo "===== DRM ====="
+ls -la /dev/dri || true
+
+echo "===== MESA ====="
+echo LIBGL_ALWAYS_SOFTWARE=${LIBGL_ALWAYS_SOFTWARE:-unset}
+echo MESA_LOADER_DRIVER_OVERRIDE=${MESA_LOADER_DRIVER_OVERRIDE:-unset}
           set -euo pipefail
           export DISPLAY=:99
           export HOME=/home/runner
